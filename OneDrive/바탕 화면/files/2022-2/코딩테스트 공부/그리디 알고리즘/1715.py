@@ -1,23 +1,26 @@
+from heapq import *
+
 N = int(input())
 
-arr = []
+heap = []
 
 for i in range(N):
     card = int(input())
-    arr.append(card)
+    heappush(heap,card)
 
 if(N == 1):
-    print(arr[0])
+    print(0)
     exit()
-elif(N == 2):
-    print(arr[0] + arr[1])
-    exit()
-else:
-    arr.sort()
 
-    min_count = arr[0] * (N-1)
+total = 0
 
-    for i in range(1,N):
-        min_count += arr[i] * (N-i)
+while(True):
+    sum = 0
+    sum += heappop(heap)
+    sum += heappop(heap)
+    total += sum
+    if(len(heap) == 0):
+        break
+    heappush(heap,sum)
 
-    print(min_count)
+print(total)
