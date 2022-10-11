@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 N = int(input())
 
 list = []
@@ -7,12 +9,31 @@ for i in range(N):
 
 list.sort(key = lambda x : len(x), reverse=True)
 
-num_list = [9,8,7,6,5,4,3,2,1]
-alpha_list = []
-
+alpha = "abcdefghijklmnopqrstuvwxyz"
+alpha_dict = defaultdict(int)
 
 for i in range(N):
     for j in range(len(list[i])):
-        alpha = list[i][j]
-        if(alpha not in alpha_list):
-            alpha_list.append(alpha)
+        alpha_dict[list[i][j]] += 10**(len(list[i])-j-1)
+
+value_list = alpha_dict.values()
+print(value_list)
+
+answer_list = []
+for i in value_list:
+    answer_list.append(i)
+
+print(answer_list)
+answer_list.sort(reverse=True)
+print(answer_list)
+
+answer = 0
+
+for i in range(9,9-len(answer_list),-1):
+    answer += i * answer_list[9-i]
+
+print(answer)
+
+
+
+
