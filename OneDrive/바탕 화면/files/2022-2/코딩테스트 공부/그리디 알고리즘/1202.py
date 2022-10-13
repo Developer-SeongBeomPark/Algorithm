@@ -1,26 +1,31 @@
-N,K = map(int,input().split())
+import sys
+import heapq
+from wsgiref.handlers import BaseCGIHandler
 
+N,K = map(int,sys.stdin.readline().split())
 
-stat = []
+jew = []
 bag = []
 
-for i in range(N):
-    stat.append(list(map(int,input().split())))
+for _ in range(N):
+    weight, price = map(int,sys.stdin.readline().split())
+    heapq.heappush(jew,[weight,price])
 
-for i in range(K):
-    bag.append(int(input()))
-    
-stat.sort(key = lambda x : (x[0],-x[1]))
+for _ in range(K):
+    capacity = int(sys.stdin.readline())
+    bag.append(capacity)
+
 bag.sort()
 
+heap = []
 total = 0
 
 for i in bag:
-    pop_value = stat.pop(0)
-
-    if(i >= pop_value[0]):
-        price = pop_value[1]
-        total += price
-
-print(total)
+    while(jew and i >= jew[0][0]):
+        pop_value = heapq.heappop(jew)
+        heapq.heappush(heap,-pop_value[1])
     
+    if(heap):
+        total -= heapq.heappop(heap)
+    
+print(total)
