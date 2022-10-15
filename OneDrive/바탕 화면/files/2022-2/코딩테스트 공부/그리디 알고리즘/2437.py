@@ -1,28 +1,21 @@
 import sys
-import heapq
-from itertools import combinations
+
 
 N = int(sys.stdin.readline())
 
 weights = list(map(int,sys.stdin.readline().split()))
 
-arr = []
+#처음부터 추 무게를 더해가며 자신의 앞에 있는 추 무게의 합보다 자신의 무게가 크면 그 사이값들은 표현할 수가 없음
 
-for i in range(1,N+1):
-    a = list(combinations(weights,i))
-    for j in range(len(a)):
-        heapq.heappush(arr,sum(a[j]))
+value = 0
 
-arr = list(set(arr))
-heapq.heapify(arr)
+weights.sort()
 
-value = 1
-
-while True:
-    min_value = heapq.heappop(arr)
-    if(value != min_value):
+for i in range(1,N):
+    value += weights[i-1]
+    if(weights[i] > value):
+        value += 1
         break
-    value += 1
 
 print(value)
 
