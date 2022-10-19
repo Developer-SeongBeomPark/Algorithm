@@ -7,34 +7,25 @@ lecture = [list(map(int,sys.stdin.readline().split())) for _ in range(N)]
 
 tmp = []
 
-num = 0
+lecture.sort()
 
-heapq.heapify(lecture)
+###########################################
 heapq.heapify(tmp)
+[start,end] = lecture[0]
+heapq.heappush(tmp,end)
 
-while lecture or tmp:
-    if(not tmp):
-        num += 1
-        [start,end] = heapq.heappop(lecture)
-        for i in range(len(lecture)):
-            value = heapq.heappop(lecture)
-            if(value[0] >= end):
-                start = value[0]
-                end = value[1]
-            else:
-                heapq.heappush(tmp,value)
+for i in range(1,N):
+    if(lecture[i][0] >= tmp[0]):
+        heapq.heappop(tmp)
+        heapq.heappush(tmp,lecture[i][1])
+    else:
+        heapq.heappush(tmp,lecture[i][1])
 
-    elif(not lecture):
-        num += 1
-        [start,end] = heapq.heappop(tmp)
-        for i in range(len(tmp)):
-            value = heapq.heappop(tmp)
-            if(value[0] >= end):
-                start = value[0]
-                end = value[1]
-            else:
-                heapq.heappush(tmp,value)
 
-print(num)
+print(len(tmp))
 
-## 시간 초과
+
+
+
+
+
