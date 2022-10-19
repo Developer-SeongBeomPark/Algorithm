@@ -22,7 +22,7 @@ for i in range(1,N):
         heapq.heappush(tmp,lecture[i][1])
 
 
-print(len(tmp))
+print(len(tmp)) 
 
 
 
