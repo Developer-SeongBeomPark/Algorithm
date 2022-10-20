@@ -12,5 +12,18 @@ for i in range(N):
 
 use_order_copy = use_order
 
+for i in use_order:
+    if i in plug:
+        use_order_copy(0)
+    
+    else:
+        for j in plug:
+            if(j not in use_order_copy):
+                plug.remove(j)
+                plug.append(i)
+                break
+        
+
+
 
     
