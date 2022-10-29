@@ -1,20 +1,13 @@
 import sys
 from collections import deque
 
-N = int(sys.stdin.readline())
-
-start = list(map(int,sys.stdin.readline().split()))
-
-end = list(map(int,sys.stdin.readline().split()))
-
-arr = [[0] * N for _ in range(N)]
-visited = [[0] * N for _ in range(N)]
+T = int(sys.stdin.readline())
 
 dx = [-2,-2,2,2,1,1,-1,-1]
 dy = [-1,1,-1,1,2,-2,2,-2]
 
 def bfs(x,y):
-    q = deque([x,y])
+    q = deque([[x,y]])
     while q:
         value = q.popleft()
         a,b = value[0],value[1]
@@ -27,5 +20,19 @@ def bfs(x,y):
                     q.append([a+dx[i],b+dy[i]])
                     arr[a+dx[i]][b+dy[i]] = arr[a][b] + 1
 
+answer = []
 
-print(bfs(start[0],start[1]))
+for _ in range(T):
+    N = int(sys.stdin.readline())
+
+    start = list(map(int,sys.stdin.readline().split()))
+
+    end = list(map(int,sys.stdin.readline().split()))
+
+    arr = [[0] * N for _ in range(N)]
+    visited = [[0] * N for _ in range(N)]
+
+    answer.append(bfs(start[0],start[1]))
+
+for i in answer:
+    print(i)
