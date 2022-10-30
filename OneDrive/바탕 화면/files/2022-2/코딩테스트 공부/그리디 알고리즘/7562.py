@@ -16,9 +16,10 @@ def bfs(x,y):
         if(0 <= a < N and 0 <= b < N and visited[a][b] == 0):
             visited[a][b] = 1
             for i in range(8):
-                if(0 <= a + dx[i] < N and 0 <= b + dy[i] < N and visited[a+dx[i]][b+dy[i]] == 0):
-                    q.append([a+dx[i],b+dy[i]])
-                    arr[a+dx[i]][b+dy[i]] = arr[a][b] + 1
+                c,r = a+dx[i],b+dy[i]
+                if(0 <= c < N and 0 <= r < N and visited[c][r] == 0):
+                    q.append([c,r])
+                    arr[c][r] = arr[a][b] + 1
 
 answer = []
 
