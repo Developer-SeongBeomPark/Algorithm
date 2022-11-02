@@ -7,7 +7,7 @@ box = list(list(map(int,sys.stdin.readline().split())) for _ in range(N))
 dx = [-1,0,1,0]
 dy = [0,-1,0,1]
 
-q = deque([])
+q = deque()
 answer = 0
 initial = True
 
@@ -27,7 +27,7 @@ def bfs():
         [x,y] = q.popleft()
         for i in range(4):
             nx = x + dx[i]
-            ny = x + dy[i]
+            ny = y + dy[i]
             if(0 <= nx < N and 0 <= ny < M and box[nx][ny] == 0):
                 box[nx][ny] = box[x][y] + 1
                 q.append([nx,ny])
@@ -38,10 +38,8 @@ for i in range(N):
     for j in range(M):
         if box[i][j] == 0:
             print(-1)
-            print(box)
             exit()
         if(box[i][j] > answer):
             answer = box[i][j]
 
-
-print(answer)        
+print(answer - 1)        
